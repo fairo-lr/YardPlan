@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/shippingdate/!svn/ver/6/shippingdate
+END
+web.config
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/shippingdate/!svn/ver/6/shippingdate/web.config
+END
+Default.aspx.vb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/shippingdate/!svn/ver/6/shippingdate/Default.aspx.vb
+END
+GetLstVslHandler.ashx
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/shippingdate/!svn/ver/6/shippingdate/GetLstVslHandler.ashx
+END
+Newtonsoft.Json.dll
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/shippingdate/!svn/ver/6/shippingdate/Newtonsoft.Json.dll
+END
+format
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/shippingdate/!svn/ver/6/shippingdate/format
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/shippingdate/!svn/ver/6/shippingdate/README.txt
+END
+Default.aspx
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/shippingdate/!svn/ver/6/shippingdate/Default.aspx
+END

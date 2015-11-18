@@ -1,0 +1,15 @@
+﻿.title
+{
+	font-size:14pt;
+	font-weight:bold;
+	margin-right:30px;
+}   /*标题的字体格式*/
+
+.divTip
+{
+	position:absolute;
+	visibility:hidden;
+	border:solid 1px black;
+	background-color: #ffffe1;
+	z-index: 100
+	}

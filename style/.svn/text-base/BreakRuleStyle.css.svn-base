@@ -1,0 +1,50 @@
+﻿body 
+{
+	font-size:9pt;
+}
+.bodyDiv
+{
+	margin-top: 10px; 
+	padding-top: 15px; 
+	position: relative; 
+	border: 1px;
+	height: 250px; 
+	width:1158px;
+	}
+.divOvery
+{
+	overflow-y:no ; 
+	width: 1165px; 
+	height: 2px; 	
+	}
+#conTab .headtr
+{
+	font-weight: bold; 
+	color: white; 
+	position: absolute; 
+	top: -31px; 
+	height:30px;
+	left:0px; 
+	text-align:center;
+	background-color: #006699; 
+	}
+#conTab
+{
+	border:1px solid #b2c9d3;
+	}
+#conTab .headtr td
+{
+	border-right:solid 1px #b2c9d3;
+	}
+.tdclass
+{
+        height:23px;
+        rules:cols;
+		border-bottom:1px solid #b2c9d3;
+		border-right:1px solid #b2c9d3;
+        word-break:break-all;
+        word-wrap:break-word;
+        empty-cells:show;
+        border-collapse:collapse;
+        text-align:center;
+    }
