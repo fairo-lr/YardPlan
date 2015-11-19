@@ -258,8 +258,8 @@ function GetAreaTable(area) {
 
 function SetAreaTableHTML(table) {
     //设置箱区HTML代码
-    var thead = "<table class='area' id='{0}'><thead class='area-head'><tr><th colspan='32'>{0}</th></tr></thead>";
-    var tfoot = "<tfoot class='area-foot'><tr><th>63</th><th>61</th><th>59</th><th>57</th><th>55</th><th>53</th><th>51</th><th>49</th><th>47</th><th>45</th><th>43</th><th>41</th><th>39</th><th>37</th><th>35</th><th>33</th><th>31</th><th>29</th><th>27</th><th>25</th><th>23</th><th>21</th><th>19</th><th>17</th><th>15</th><th>13</th><th>11</th><th>09</th><th>07</th><th>05</th><th>03</th><th>01</th></tr></tfoot></table>";
+    var thead = "<table class='area' id='{0}'><thead class='area-head'><tr><th colspan='33'>{0}</th></tr></thead>";
+    var tfoot = "<tfoot class='area-foot'><tr><th>65</th><th>63</th><th>61</th><th>59</th><th>57</th><th>55</th><th>53</th><th>51</th><th>49</th><th>47</th><th>45</th><th>43</th><th>41</th><th>39</th><th>37</th><th>35</th><th>33</th><th>31</th><th>29</th><th>27</th><th>25</th><th>23</th><th>21</th><th>19</th><th>17</th><th>15</th><th>13</th><th>11</th><th>09</th><th>07</th><th>05</th><th>03</th><th>01</th></tr></tfoot></table>";
     thead = String.format(thead, table[0]["YRP_AREA"]);
 
     var tbody = "<tr>";
@@ -324,7 +324,7 @@ function InitialBay($this) {
 
 function InitialArea(area) {
     //清空箱区信息
-    for (var j = 1; j <= 63; j += 2) {
+    for (var j = 1; j <= 65; j += 2) {
         var area = area;
         var bay = j;
         var squeue = j;

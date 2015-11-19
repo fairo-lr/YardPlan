@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>出口堆存分析报表</title>
+    <style type="text/css">
+        *
+        {
+            margin: 0;
+            padding: 0;
+            font-family: 'Calibri' 'Arial' '微软雅黑';
+        }
+        ul
+        {
+            display: list-item;
+        }
+        table
+        {
+            text-align: center;
+            line-height: 25px;
+            border-collapse: collapse;
+            width: 1000px;
+            border: none;
+        }
+        table td
+        {
+            border: solid #b2c9d3 1px;
+            max-width: 260px;
+            vertical-align: top;
+            text-align: left;
+        }
+        h3
+        {
+            margin: 20px 0px 20px 0px;
+        }
+        .search
+        {
+            margin-bottom: 20px;
+        }
+        #btnCheck
+        {
+            width: 100px;
+            height: 30px;
+        }
+        .port
+        {
+            background-color: #006699;
+            color: white;
+            font-weight: bolder;
+            width: 200px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        table thead
+        {
+            background-color: #006699;
+            color: White;
+        }
+        table span
+        {
+            width: 50px;
+            display: inline-block;
+        }
+        table div
+        {
+            width: 50px;
+            background-color: Yellow;
+            font-weight: bolder;
+            text-align: center;
+        }
+        #lnecd
+        {
+            width: 200px;
+            line-height: 30px;
+            height: 30px;
+            font-size: 14pt;
+        }
+    </style>
+    <script type="text/javascript" src="scripts/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetShipLineInfo("sqlserver");
+            $("#btnCheck").click(function () {
+                jQuery.ajax({
+                    type: "POST",
+                    url: "YardAnalyse_ashx/YardAnalyse_YPReport_GetPorts.ashx",
+                    data: { "lnecd": $("#lnecd").val() },
+                    success: function (output) {
+                        if (output != "") {
+                            $("#table").find("tbody").empty().append(output);
+                        }
+                        else {
+                            $("#table").find("tbody").empty().append("<tr> <td style='text-align:center;' colspan='4'>无数据</td></tr>");
+                        }
+                    }
+                });
+                $("#lnecdName").text($("#lnecd").val());
+                return false;
+            }); 
+        });
+
+        function GetShipLineInfo(dbsource) {
+            //从dbsource数据库中获取航线名，不同数据库对应不同DOM
+            jQuery.ajax({
+                type: "POST",
+                url: "YardAnalyse_ashx/YardAnalyse_Get_ShipLineName.ashx",
+                data: { "dbName": dbsource },
+                success: function (output) {
+                    if (output != "<option> </option>") {
+                        if (dbsource == "sqlserver") {
+                            $("#lnecd").empty().append(output);
+                        }
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <h3>
+        出口堆存分析报表</h3>
+    <div class="search">
+        <select id="lnecd">
+        </select>
+        <input type="button" id="btnCheck" value="查询" /></div>
+    <div class="mainbody">
+        <table id="table" cellpadding='0' cellspacing='0'>
+            <thead>
+                <tr>
+                    <th class="port">
+                        <label id="lnecdName">
+                            航线
+                        </label>
+                    </th>
+                    <th>
+                        20GP
+                    </th>
+                    <th>
+                        40GP
+                    </th>
+                    <th>
+                        40HQ
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style='text-align: center;' colspan='4'>
+                        无数据
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

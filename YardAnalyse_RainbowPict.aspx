@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>堆存计划-彩虹图</title>  
+    <title>堆存计划--彩虹图</title>  
     <link rel="stylesheet" type="text/css" href="style/YardAnalyse_rainbow.css" />
     <script type="text/javascript" src="scripts/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="scripts/YardAnalyse_rainbow_main.js"></script>
@@ -147,9 +147,11 @@
             </select></li>
             <li><span>卸货港2：</span><select id="dialogArea_port2">
             </select></li>
-            <li><span>箱高：</span><select id="dialogArea_height">
+            <li><span>箱高：</span><select id="dialogArea_height">            
+                <option></option>
                 <option>GP</option>
-                <option>HQ</option>
+                <option>HQ</option>                
+                <option>GP+HQ</option>
             </select></li>
             <li><span>箱尺寸：</span><select id="dialogArea_size">
                 <option>20</option>
