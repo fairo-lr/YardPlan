@@ -78,10 +78,9 @@
 #dialogShip span {
 	display: -moz-inline-box;
 	display: inline-block;
-	width: 100px;
+	width: 100px;	
 }
-.ship {
-    
+.ship { 
     word-spacing: -3px;
     position: fixed;
     margin-left: 10px;
@@ -91,6 +90,8 @@
 .ship div {
 	float: left;
 }
+.ship-info{color:#575656;
+	font-weight:bolder;}
 .ship span {
 	border-right: 1px solid white;
 	display: inline-block;

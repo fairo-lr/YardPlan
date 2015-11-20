@@ -19,8 +19,8 @@ var g_DialogAreaModel = {
 var g_DialogShipModel = {
     position: [500, 200],
     resizable: false,
-    width: 270,
-    height: 360,
+    width: 300,
+    height: 430,
     overlay: {
         backgroundColor: '#000',
         opacity: 0.5
@@ -136,6 +136,8 @@ function DeleteShipLineData(lnecd) {
 function UpdateShipLineData($this) {
     var lnecd = $this.find("#dialogShip_lnecd").val();
     var color = $this.find("#dialogShip_color").val();
+    var name = $this.find("#dialogShip_name").val();
+    var relate_lnecd = $this.find("#dialogShip_lnecd2").val();
     var ports = "";
     $this.find("#dialogShip_port").find("input").each(function () {
         if ($(this).attr("checked") == "checked") {
@@ -146,7 +148,7 @@ function UpdateShipLineData($this) {
     jQuery.ajax({
         type: "POST",
         url: "YardAnalyse_ashx/YardAnalyse_Insert_ShipLine.ashx",
-        data: { "lnecd": lnecd, "color": color, "ports": ports },
+        data: { "lnecd": lnecd, "color": color, "ports": ports, "name": name, "relate_lnecd": relate_lnecd },
         success: function (output) {
             SetShipLineInfo();
             $("#shipmessage").show().hide(2000);
@@ -167,7 +169,8 @@ function GetShipLineInfo(dbsource, lnecd) {
                     $("#dialogArea_lnecd").empty().append(output).val(lnecd);
                 }
                 else {
-                    $("#dialogShip_lnecd").empty().append(output);
+                    $("#dialogShip_lnecd").empty().append(output); 
+                    $("#dialogShip_lnecd2").empty().append(output);
                 }
             }
         }
@@ -211,9 +214,6 @@ $("#dialogShip_lnecd").empty().append(output);
 }
 });
 }*/
-
-
-
 
 function SetShipLineInfo() {
     jQuery.ajax({
