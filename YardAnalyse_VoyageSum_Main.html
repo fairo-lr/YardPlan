@@ -111,7 +111,7 @@
         //设置两个select的option值
         jQuery.ajax({
             type: "POST",
-            url: "YardAnalyse_GetVoyage.ashx",
+            url: "YardAnalyse_ashx/YardAnalyse_GetVoyage.ashx",
             data: { "lnecd": lnecd },
             success: function (options) {
                 if (options != "<option value=''></option>") {
