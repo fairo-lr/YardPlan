@@ -46,7 +46,7 @@
         <div class="main">
             <div class="left">
                 <h3>
-                    1</h3>
+                    进闸箱量统计</h3>
                 <asp:GridView ID="gvVoyageSum" runat="server" CellPadding="4" GridLines="None" AutoGenerateColumns="false"
                     ForeColor="#333333" BorderColor="LightGray" CellSpacing="1"   Font-Size="9pt"
                     AllowPaging="false" BackColor="#B2C9D3" Width="480px"   EmptyDataText="无纪录!">
@@ -73,7 +73,7 @@
             </div>
             <div class="right">
                 <h3>
-                    2</h3>
+                    进闸贝位需求</h3>
                 <asp:GridView ID="gvVoyageSum2" runat="server" CellPadding="4" GridLines="None" 
                     AllowPaging="false" AutoGenerateColumns="false" ForeColor="#333333" BorderColor="LightGray"
                     CellSpacing="1" Font-Size="9pt" BackColor="#B2C9D3" Width="480px"

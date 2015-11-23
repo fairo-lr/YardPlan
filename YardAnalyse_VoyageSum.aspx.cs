@@ -64,7 +64,7 @@ select v.V_OCRRID,
                  else
                   0
                END AS 'RF45'
-          FROM VoyageCnstSum v1) V
+          FROM ya_VoyageCnstSum v1) V
  where v.v_ocrrid = '{0}'
  group by V.V_OCRRID, V.V_LNECD, V.V_POT_LDUNLDPORT
 
@@ -131,7 +131,7 @@ select v.V_OCRRID,
                  else
                   0
                END AS 'RF45'
-          FROM VoyageCnstSum v1) V
+          FROM ya_VoyageCnstSum v1) V
  where v.v_ocrrid = '{0}'
  group by V.V_OCRRID, V.V_LNECD, V.V_POT_LDUNLDPORT
  
