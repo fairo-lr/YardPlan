@@ -7,38 +7,73 @@
         {
             margin: 0;
             padding: 0;
-            font-family: 'Calibri' 'Arial' '微软雅黑';
+            font-family: '微软雅黑' , '宋体';
         }
         ul
         {
-            display: list-item;
+            list-style: none;
+        }
+        li
+        {
+            display: inline;
+        }
+        h3
+        {
+            font-family: 'Calibri' 'Arial' '微软雅黑';
+            margin: 20px 0px 20px 0px;
         }
         table
         {
             text-align: center;
             line-height: 25px;
             border-collapse: collapse;
-            width: 1000px;
+            width: 1180px;
             border: none;
+        }
+        table td, th
+        {
+            border: solid #b2c9d3 1px;
         }
         table td
         {
-            border: solid #b2c9d3 1px;
-            max-width: 260px;
             vertical-align: top;
             text-align: left;
         }
-        h3
+        table thead
         {
-            margin: 20px 0px 20px 0px;
+            background-color: #006699;
+            color: White;
+            height: 30px;
+            line-height: 30px;
+        }
+        table span
+        {
+            width: 50px;
+            display: inline-block;
+            text-align: center;
+            font-size: 12pt;
+        }
+        table div
+        {
+            width: 50px;
+            background-color: #FFFF84;
+            font-weight: bolder;
+            text-align: center;
+            font-weight: bolder;
+        }
+        #lnecd
+        {
+            width: 200px;
+            line-height: 30px;
+            height: 30px;
         }
         .search
         {
             margin-bottom: 20px;
         }
-        #btnCheck
+        #btnSearch
         {
-            width: 100px;
+            width: 80px;
             height: 30px;
         }
         .port
@@ -46,111 +81,113 @@
             background-color: #006699;
             color: white;
             font-weight: bolder;
-            width: 200px;
             vertical-align: middle;
             text-align: center;
+            width: 150px;
         }
-        table thead
+        .span-title
         {
-            background-color: #006699;
-            color: White;
-        }
-        table span
-        {
-            width: 50px;
-            display: inline-block;
-        }
-        table div
-        {
-            width: 50px;
-            background-color: Yellow;
-            font-weight: bolder;
             text-align: center;
+            font-weight: bolder;            
+            font-size: 10pt;
+            width: 70px;
         }
-        #lnecd
+        .total
         {
-            width: 200px;
-            line-height: 30px;
-            height: 30px;
-            font-size: 14pt;
+            width: 50px;
+            font-size:12pt;
         }
     </style>
     <script type="text/javascript" src="scripts/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            GetShipLineInfo("sqlserver");
-            $("#btnCheck").click(function () {
-                jQuery.ajax({
-                    type: "POST",
-                    url: "YardAnalyse_ashx/YardAnalyse_YPReport_GetPorts.ashx",
-                    data: { "lnecd": $("#lnecd").val() },
-                    success: function (output) {
-                        if (output != "") {
-                            $("#table").find("tbody").empty().append(output);
-                        }
-                        else {
-                            $("#table").find("tbody").empty().append("<tr> <td style='text-align:center;' colspan='4'>无数据</td></tr>");
-                        }
-                    }
-                });
-                $("#lnecdName").text($("#lnecd").val());
-                return false;
-            }); 
-        });
-
-        function GetShipLineInfo(dbsource) {
-            //从dbsource数据库中获取航线名，不同数据库对应不同DOM
-            jQuery.ajax({
-                type: "POST",
-                url: "YardAnalyse_ashx/YardAnalyse_Get_ShipLineName.ashx",
-                data: { "dbName": dbsource },
-                success: function (output) {
-                    if (output != "<option> </option>") {
-                        if (dbsource == "sqlserver") {
-                            $("#lnecd").empty().append(output);
-                        }
-                    }
-                }
-            });
-        }
-
-    </script>
 </head>
 <body>
-    <h3>
-        出口堆存分析报表</h3>
-    <div class="search">
-        <select id="lnecd">
-        </select>
-        <input type="button" id="btnCheck" value="查询" /></div>
-    <div class="mainbody">
-        <table id="table" cellpadding='0' cellspacing='0'>
-            <thead>
-                <tr>
-                    <th class="port">
-                        <label id="lnecdName">
-                            航线
-                        </label>
-                    </th>
-                    <th>
-                        20GP
-                    </th>
-                    <th>
-                        40GP
-                    </th>
-                    <th>
-                        40HQ
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style='text-align: center;' colspan='4'>
-                        无数据
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="wrapper">
+        <h3>
+            出口堆存分析报表</h3>
+        <div class="search">
+            <ul>
+                <li>航线：<select id="lnecd"></select>
+                </li>
+                <li>
+                    <input type="button" id="btnSearch" value="查询" />
+                </li>
+            </ul>
+        </div>
+        <div class="mainbody">
+            <table id="table" cellpadding='0' cellspacing='0'>
+                <thead>
+                    <tr>
+                        <th class="port">
+                            <label id="lnecdName">
+                                航线
+                            </label>
+                        </th>
+                        <th>
+                            20GP
+                        </th>
+                        <th class="total">
+                            &nbsp;
+                        </th>
+                        <th>
+                            40GP
+                        </th>
+                        <th class="total">
+                            &nbsp;
+                        </th>
+                        <th>
+                            40HQ
+                        </th>
+                        <th class="total">
+                            &nbsp;
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style='text-align: center;' colspan='7'>
+                            无数据
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetShipLineInfo();
+        $("#btnSearch").click(function () {
+            jQuery.ajax({
+                type: "POST",
+                url: "YardAnalyse_ashx/YardAnalyse_YPReport_GetPorts.ashx",
+                data: { "lnecd": $("#lnecd").val() },
+                success: function (output) {
+                    if (output != "") {
+                        $("#table").find("tbody").empty().append(output);
+                    }
+                    else {
+                        $("#table").find("tbody").empty().append("<tr> <td style='text-align:center;' colspan='7'>无数据</td></tr>");
+                    }
+                }
+            });
+            $("#lnecdName").text($("#lnecd").val());
+            return false;
+        });
+    });
+
+    function GetShipLineInfo() {
+        //从dbsource数据库中获取航线名，不同数据库对应不同DOM 
+        jQuery.ajax({
+            type: "POST",
+            url: "YardAnalyse_ashx/YardAnalyse_GetVoyage.ashx",
+            data: { "lnecd": null },
+            success: function (output) {
+                if (output != "<option> </option>") {
+                    $("#lnecd").empty().append(output);
+                }
+            }
+        });
+    }
+
+</script>

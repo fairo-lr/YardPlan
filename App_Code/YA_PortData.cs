@@ -70,39 +70,27 @@ public class CTYPE
     #region 属性
     private string m_type;
     public List<string> bayList = new List<string>(); //BAYLIST
-    public List<double> cntrSum = new List<double>();//需求贝数
+    public List<SUMTYPE> cntrSum = new List<SUMTYPE>();//需求贝数
 
     #endregion
-
     
     #region 方法
 
-    public string Type { get { return m_type; } }
-
-    public void ClearbayList()
+    public string Type
     {
-        bayList.Clear();
+        get { return m_type; }
     }
 
+   
     public void InsertbayList(string bay)
     {
         bayList.Add(bay);
-    }
+    }   
 
-    public void ClearcntrSum()
+    public void CntrSum(List<SUMTYPE> sumList)
     {
         cntrSum.Clear();
-    }
-
-    public void InsertCntrSum(double sum)
-    {
-        cntrSum.Add(sum);
-    }
-
-    public void CntrSum(List<double> sum)
-    {
-        cntrSum.Clear();
-        cntrSum = sum;
+        cntrSum = sumList;
     }
 
     public void BayList(List<string> bays)
@@ -113,37 +101,53 @@ public class CTYPE
 
     public string GetBayInfo()
     {
-        string info = "";
-
+        string str = "";
         if (bayList.Count != 0)
         {
-            info="<div>" + bayList.Count + "</div>";
             for (int i = 0; i < bayList.Count; i++)
             {
-                info += "<span>" + bayList[i].ToString() + "</span>";
-                if ((i + 1) % 5 == 0) { info += "<br/>"; }
+                if (i == 0) { str += "<span class='span-title'>当前贝位</span><br/>"; }
+                str += string.Format("<span>{0}</span>", bayList[i].ToString());
+                if ((i + 1) % 5 == 0) { str += "<br/>"; }
             }
         }
-
-        return info == "" ? "&nbsp;" : info;
+        return str == "" ? "&nbsp;" : str;
     }
 
     public string GetSumInfo()
     {
-        string info = "";
+        string str = "";
         if (cntrSum.Count != 0)
-        {
-            info = "<div>" + SumTotal + "</div>";
+        { 
             for (int i = 0; i < cntrSum.Count; i++)
             {
-                info += "<span>" + cntrSum[i].ToString() + "</span>";
-                if ((i + 1) % 5 == 0) { info += "<br/>"; }
-            }                
-        }
-        
-        return info==""?"&nbsp;":info;
+                if (i == 0) { str += "<span class='span-title'>需求贝数<br/>记录日期</span>"; }
+                str += string.Format("<span>{0}<br/>{1}</span>", cntrSum[i].Sum.ToString(), cntrSum[i].Date);
+                if ((i + 1) % 5 == 0) { str += "<br/>"; }
+            }
+        } 
+        return str == "" ? "&nbsp;" : str;
     }
 
+
+    public string GetSumTotal()
+    {
+        return string.Format("<div>{0}</div>", SumTotal);
+    }
+
+    public string GetBayTotal()
+    {
+        if (bayList.Count != 0)
+            return Convert.ToDouble(bayList.Count) >= SumTotal ?
+            string.Format("<div style='color:red;'>{0}<div>", bayList.Count) : string.Format("<div style='color:green;'>{0}<div>", bayList.Count);
+        else
+            return "<div>0<div>";
+    }
+
+
+    /// <summary>
+    /// 计算需求贝数平均值
+    /// </summary>
     public double SumTotal
     {
         get
@@ -151,15 +155,42 @@ public class CTYPE
             double total = 0.0;
             for (int i = 0; i < cntrSum.Count; i++)
             {
-                total += cntrSum[i];
+                total += cntrSum[i].Sum;
             }
-            return Math.Round(total / cntrSum.Count,2);
+            return Math.Round(total / cntrSum.Count, 2);
         }
-    }
-
+    } 
     #endregion
-    
-     
-
 }
+
+public class SUMTYPE
+{
+    /// <summary>
+    /// 历史堆存记录
+    /// </summary>
+    /// <param name="sum">堆存量</param>
+    /// <param name="date">记录日期</param>
+    public SUMTYPE(double sum, string date)
+    {
+        m_sum = sum;
+        m_date = date;
+    }
+    
+    #region 属性
+    private double m_sum;
+    private string m_date;
+    #endregion
+
+    #region 方法
+    public double Sum
+    {
+        get { return m_sum; }
+    }
+    public string Date
+    {
+        get { return m_date; }
+    }
+    #endregion
+}
+
 

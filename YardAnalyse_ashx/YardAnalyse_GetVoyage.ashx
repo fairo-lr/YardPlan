@@ -55,7 +55,8 @@ public class YardAnalyse_GetVoyage : IHttpHandler
        vessel vs
  where vcs.v_ocrrid = vs.vs_vesselcode
    and vcs.lnecd = '{0}'
- order by vcs.v_recordtime desc ",lnecd);
+   and vs_finsh is not null
+ order by vcs.v_recordtime desc ", lnecd);
         }
 
         #endregion
