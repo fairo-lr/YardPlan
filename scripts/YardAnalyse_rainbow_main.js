@@ -169,7 +169,7 @@ function GetShipLineInfo(dbsource, lnecd) {
                     $("#dialogArea_lnecd").empty().append(output).val(lnecd);
                 }
                 else {
-                    $("#dialogShip_lnecd").empty().append(output); 
+                    $("#dialogShip_lnecd").empty().append(output);
                     $("#dialogShip_lnecd2").empty().append(output);
                 }
             }
@@ -248,9 +248,10 @@ function GetAreaTable(area) {
         datatype: "JSON",
         url: "YardAnalyse_ashx/YardAnalyse_Get_RainbowPict.ashx",
         data: { "area": area, "bay": null },
-        success: function (output) {
-            if (output != "") {
-                SetAreaTableHTML(output);
+        success: function (tableHtml) {
+            if (tableHtml != "") {
+                // SetAreaTableHTML(output);
+                $("#div-" + area).empty().append(tableHtml);
             }
         }
     });
@@ -258,23 +259,23 @@ function GetAreaTable(area) {
 
 function SetAreaTableHTML(table) {
     //设置箱区HTML代码
-    var thead = "<table class='area' id='{0}'><thead class='area-head'><tr><th colspan='33'>{0}</th></tr></thead>";
+    var thead = "<table class='area' id='{0}'><thead class='area-head'><tr><th colspan='{1}'>{0}</th></tr></thead>";
     var tfoot = "<tfoot class='area-foot'><tr><th>65</th><th>63</th><th>61</th><th>59</th><th>57</th><th>55</th><th>53</th><th>51</th><th>49</th><th>47</th><th>45</th><th>43</th><th>41</th><th>39</th><th>37</th><th>35</th><th>33</th><th>31</th><th>29</th><th>27</th><th>25</th><th>23</th><th>21</th><th>19</th><th>17</th><th>15</th><th>13</th><th>11</th><th>09</th><th>07</th><th>05</th><th>03</th><th>01</th></tr></tfoot></table>";
-    thead = String.format(thead, table[0]["YRP_AREA"]);
+    thead = String.format(thead, table[0]["YRP_AREA"], table.length);
 
     var tbody = "<tr>";
     var tdHTML = "<td style='background-color:{0};width:{11}px;' area='{1}' bay='{2}' lnecd='{3}' size='{4}' height='{5}' port1='{6}' port2='{7}' colspan='{8}' squeue='{10}'>{9}</td>";
     for (var i = 0; i < table.length; i++) {
         var content = table[i]["YRP_LDUNLDPORT1"] + "<br/>" + table[i]["YRP_LDUNLDPORT2"] + "<br/>" + table[i]["YRP_CNTR_HEIGHT"] + "<br/>" + table[i]["YRP_CNTR_SIZE"];
         if (table[i]["YRP_CNTR_SIZE"] == "40" || table[i]["YRP_CNTR_SIZE"] == "45") {
-            tbody += String.format(tdHTML, table[i]["YSC_COLOR"], table[i]["YRP_AREA"], table[i]["YRP_BAY"], table[i]["YRP_LNECD"], table[i]["YRP_CNTR_SIZE"], table[i]["YRP_CNTR_HEIGHT"], table[i]["YRP_LDUNLDPORT1"], table[i]["YRP_LDUNLDPORT2"], 2, content, table[i]["YRP_SQUEUE"], 66);
+            tbody += String.format(tdHTML, table[i]["YSC_COLOR"], table[i]["YRP_AREA"], table[i]["YRP_BAY"], table[i]["YRP_LNECD"], table[i]["YRP_CNTR_SIZE"], table[i]["YRP_CNTR_HEIGHT"], table[i]["YRP_LDUNLDPORT1"], table[i]["YRP_LDUNLDPORT2"], 1, content, table[i]["YRP_SQUEUE"], 66);
         }
         else {
             tbody += String.format(tdHTML, table[i]["YSC_COLOR"], table[i]["YRP_AREA"], table[i]["YRP_BAY"], table[i]["YRP_LNECD"], table[i]["YRP_CNTR_SIZE"], table[i]["YRP_CNTR_HEIGHT"], table[i]["YRP_LDUNLDPORT1"], table[i]["YRP_LDUNLDPORT2"], 1, content, table[i]["YRP_SQUEUE"], 33);
         }
     }
     tbody += "</tr>";
-    var tableHTML = thead + tbody + tfoot;
+    var tableHTML = thead + tbody; // + tfoot;
     $("#div-" + table[0]["YRP_AREA"]).empty().append(tableHTML);
 }
 
@@ -324,29 +325,14 @@ function InitialBay($this) {
 
 function InitialArea(area) {
     //清空箱区信息
-    for (var j = 1; j <= 65; j += 2) {
-        var area = area;
-        var bay = j;
-        var squeue = j;
-        var lnecd = '';
-        var ldunldport1 = '';
-        var ldunldport2 = '';
-        var height = '';
-        var size = '';
-        jQuery.ajax({
-            type: "POST",
-            url: "YardAnalyse_ashx/YardAnalyse_Insert_RainbowPict.ashx",
-            data: { "area": area, "bay": bay, "squeue": squeue, "lnecd": lnecd,
-                "ldunldport1": ldunldport1, "ldunldport2": ldunldport2,
-                "height": height, "size": size
-            },
-            success: function (rownum) {
-                if (rownum != 0) {
-                    GetAreaTable(area);
-                }
-            }
-        });
-    }
+    jQuery.ajax({
+        type: "POST",
+        url: "YardAnalyse_ashx/YardAnalyse_Reset_RainbowPict.ashx",
+        data: { "area": area },
+        success: function (rownum) {
+            GetAreaTable(area);
+        }
+    });
 }
 
 

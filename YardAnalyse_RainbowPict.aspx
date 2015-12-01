@@ -130,7 +130,7 @@
                     无B5箱区资料
                 </div>
             </div>
-            <div class="div-col">
+            <div class="div-col-last">
                 <div id="div-A1">
                     无A1箱区资料
                 </div>

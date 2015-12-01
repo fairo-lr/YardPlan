@@ -6,8 +6,8 @@ using System.Data.SqlClient;
 using System.Data;
 
 
-public class YardAnalyse_Insert_ShipLine : IHttpHandler {
-
+public class YardAnalyse_Insert_ShipLine : IHttpHandler
+{
     public void ProcessRequest(HttpContext context)
     {
         context.Response.ContentType = "text/plain";
@@ -15,8 +15,8 @@ public class YardAnalyse_Insert_ShipLine : IHttpHandler {
         string lnecd = context.Request["lnecd"].ToString();
         string color = context.Request["color"].ToString();
         string ports = context.Request["ports"].ToString();
-        string name = context.Request["name"].ToString(); ;
-        string relate_lnecd = context.Request["relate_lnecd"].ToString(); ;
+        string name = context.Request["name"].ToString();
+        string relate_lnecd = context.Request["relate_lnecd"].ToString();
 
         SqlCommand cmd = new SqlCommand("ya_insert_shipline");
         cmd.CommandType = CommandType.StoredProcedure;
@@ -33,9 +33,11 @@ public class YardAnalyse_Insert_ShipLine : IHttpHandler {
         int rownum = helper.ExecuteProcedure(cmd);
         context.Response.Write(rownum);
     }
- 
-    public bool IsReusable {
-        get {
+
+    public bool IsReusable
+    {
+        get
+        {
             return false;
         }
     }
