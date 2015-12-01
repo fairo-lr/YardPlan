@@ -216,7 +216,11 @@ SELECT DISTINCT YRP_CNTR_SIZE + YRP_CNTR_HEIGHT ctype
 SELECT DISTINCT bay
   FROM (SELECT YRP_LNECD line,
                YRP_LDUNLDPORT1 port,
-               YRP_CNTR_SIZE + YRP_CNTR_HEIGHT ctype,
+               CASE 
+			WHEN YRP_CNTR_HEIGHT != 'G/H'
+				THEN YRP_CNTR_SIZE + YRP_CNTR_HEIGHT
+			ELSE YRP_CNTR_SIZE + 'HQ'
+			END AS ctype,
                YRP_AREA + YRP_BAY bay
           FROM ya_rainbow_pict
          WHERE CONVERT(INT, YRP_BAY) >= YRP_SQUEUE
@@ -225,7 +229,11 @@ SELECT DISTINCT bay
         UNION ALL
         SELECT YRP_LNECD line,
                YRP_LDUNLDPORT2 port,
-               YRP_CNTR_SIZE + YRP_CNTR_HEIGHT ctype,
+               CASE 
+			WHEN YRP_CNTR_HEIGHT != 'G/H'
+				THEN YRP_CNTR_SIZE + YRP_CNTR_HEIGHT
+			ELSE YRP_CNTR_SIZE + 'HQ'
+			END AS ctype,
                YRP_AREA + YRP_BAY bay
           FROM ya_rainbow_pict
          WHERE CONVERT(INT, YRP_BAY) >= YRP_SQUEUE
