@@ -139,7 +139,7 @@ public class CTYPE
     {
         if (bayList.Count != 0)
             return Convert.ToDouble(bayList.Count) >= SumTotal ?
-            string.Format("<div style='color:red;'>{0}<div>", bayList.Count) : string.Format("<div style='color:green;'>{0}<div>", bayList.Count);
+            string.Format("<div style='color:green;'>{0}<div>", bayList.Count) : string.Format("<div style='color:red;'>{0}<div>", bayList.Count);
         else
             return "<div>0<div>";
     }
